@@ -16,3 +16,5 @@ To run the tests, do:
     py.test vispy_volume
 
 at the root of the repository. This requires the [pytest](http://pytest.org) module to be installed.
+
+Have fun!
