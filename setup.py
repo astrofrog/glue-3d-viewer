@@ -46,7 +46,7 @@ install_requires = ['numpy',
                     'astropy>=1.1',
                     'pillow']
 
-test_requires = ['pytest>=3.5,<3.7',
+test_requires = ['pytest',
                  'pytest-cov',
                  'pytest-qt',
                  'pytest-faulthandler',
