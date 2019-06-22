@@ -49,7 +49,6 @@ install_requires = ['numpy',
 test_requires = ['pytest',
                  'pytest-cov',
                  'pytest-qt',
-                 'pytest-faulthandler',
                  'objgraph',
                  'mock']
 
