@@ -35,7 +35,7 @@ jobs:
   - script: start-xvfb
     displayName: Setting up Xvfb
 
-  - script: python$(python.version) -m pip install pip --upgrade
+  - script: python$(python.version) -m pip install pip setuptools --upgrade
     displayName: Upgrading pip
 
   - script: python$(python.version) -m pip install git+https://github.com/glue-viz/glue --progress-bar off
