@@ -17,9 +17,9 @@ jobs:
       py35-pyqt510:
         containerImage: glueviz/py35-pyqt510:1.2
       py36-pyqt511:
-        containerImage: glueviz/py35-pyqt511:1.2
+        containerImage: glueviz/py36-pyqt511:1.2
       py36-pyqt512:
-        containerImage: glueviz/py35-pyqt512:1.2
+        containerImage: glueviz/py36-pyqt512:1.2
 
   container: $[ variables['containerImage'] ]
 
@@ -27,6 +27,9 @@ jobs:
 
   - script: start-xvfb
     displayName: Setting up Xvfb
+
+  - script: pip install pip --upgrade
+    displayName: Upgrading pip
 
   - script: pip install git+https://github.com/glue-viz/glue --progress-bar off
     displayName: Installing developer version of glue
