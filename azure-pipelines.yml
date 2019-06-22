@@ -35,17 +35,13 @@ jobs:
   - script: start-xvfb
     displayName: Setting up Xvfb
 
-  - script: python$(python.version) -m pip install pip setuptools --upgrade
-    displayName: Upgrading pip
-
-  - script: python$(python.version) -m pip install git+https://github.com/glue-viz/glue --progress-bar off
-    displayName: Installing developer version of glue
-
-  - script: python$(python.version) -m pip install .[test] pytest-faulthandler==1.5.0 --progress-bar off
-    displayName: Installing package and dependencies
-
-  - script: python$(python.version) -m pip freeze
-    displayName: List installed packages
-
-  - script: python$(python.version) -m pytest glue_vispy_viewers
-    displayName: Run tests
+  - script: |
+      python$(python.version) -m pip install virtualenv
+      python$(python.version) -m virtualenv dev --system-site-packages
+      source dev/bin/activate
+      python$(python.version) -m pip install pip setuptools --upgrade
+      python$(python.version) -m pip install git+https://github.com/glue-viz/glue
+      python$(python.version) -m pip install .[test] pytest-faulthandler==1.5.0
+      python$(python.version) -m pip freeze
+      python$(python.version) -m pytest glue_vispy_viewers
+    displayName: Running tests
