@@ -1,0 +1,41 @@
+jobs:
+
+- job: Linux
+  pool:
+    vmImage: Ubuntu 16.04
+
+  strategy:
+    matrix:
+      py27-pyqt510:
+        containerImage: glueviz/py27-pyqt510:1.2
+      py35-pyqt57:
+        containerImage: glueviz/py35-pyqt57:1.2
+      py35-pyqt58:
+        containerImage: glueviz/py35-pyqt58:1.2
+      py35-pyqt59:
+        containerImage: glueviz/py35-pyqt59:1.2
+      py35-pyqt510:
+        containerImage: glueviz/py35-pyqt510:1.2
+      py36-pyqt511:
+        containerImage: glueviz/py35-pyqt511:1.2
+      py36-pyqt512:
+        containerImage: glueviz/py35-pyqt512:1.2
+
+  container: $[ variables['containerImage'] ]
+
+  steps:
+
+  - script: start-xvfb
+    displayName: Setting up Xvfb
+
+  - script: pip install git+https://github.com/glue-viz/glue --progress-bar off
+    displayName: Installing developer version of glue
+
+  - script: pip install .[test] pytest-faulthandler==1.5.0 --progress-bar off
+    displayName: Installing package and dependencies
+
+  - script: pip freeze
+    displayName: List installed packages
+
+  - script: pytest glue_vispy_viewers
+    displayName: Run tests
